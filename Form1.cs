@@ -66,6 +66,6 @@ public partial class Form1 : Form
         using var dialog = new SaveFileDialog { Filter = "Metin dosyası (*.txt)|*.txt", FileName = $"tus-kayitlari-{DateTime.Now:yyyyMMdd-HHmm}.txt", Title = "Tuş kayıtlarını kaydet" };
         if (dialog.ShowDialog(this) != DialogResult.OK) return;
         try { File.WriteAllLines(dialog.FileName, ["Zaman\tOlay\tTuş", .. _records.Select(r => r.ToFileString())]); MessageBox.Show(this, "Kayıt dosyası başarıyla kaydedildi.", "Dışa aktarma tamamlandı", MessageBoxButtons.OK, MessageBoxIcon.Information); }
-        catch (IOException ex) { MessageBox.Show(this, $"Dosya kaydedilemedi: {ex.Message}", "Kayıt hatası", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+        catch (Exception ex) when (ex is IOException or UnauthorizedAccessException) { MessageBox.Show(this, $"Dosya kaydedilemedi: {ex.Message}", "Kayıt hatası", MessageBoxButtons.OK, MessageBoxIcon.Error); }
     }
 }

@@ -7,6 +7,9 @@ obj/
 *.log
 data/
 recordings/
+tuş-kayıtları-*.txt
+tus-kayitlari-*.txt
+key-recordings-*.txt
 *.wav
 *.mp3
 *.csv
